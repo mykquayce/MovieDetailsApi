@@ -1,0 +1,186 @@
+{
+  "page": 1,
+  "total_results": 9,
+  "total_pages": 1,
+  "results": [
+    {
+      "vote_count": 2441,
+      "id": 324849,
+      "video": false,
+      "vote_average": 7.2,
+      "title": "The Lego Batman Movie",
+      "popularity": 12.769,
+      "poster_path": "/1pHOqpdCYNmtRVJs6pGKQKttrPm.jpg",
+      "original_language": "en",
+      "original_title": "The Lego Batman Movie",
+      "genre_ids": [
+        28,
+        16,
+        35,
+        10751,
+        14
+      ],
+      "backdrop_path": "/jqnbac3oind5VOcAN0mTXyapOGh.jpg",
+      "adult": false,
+      "overview": "In the irreverent spirit of fun that made “The Lego Movie” a worldwide phenomenon, the self-described leading man of that ensemble—Lego Batman—stars in his own big-screen adventure. But there are big changes brewing in Gotham, and if he wants to save the city from The Joker’s hostile takeover, Batman may have to drop the lone vigilante thing, try to work with others and maybe, just maybe, learn to lighten up.",
+      "release_date": "2017-02-08"
+    },
+    {
+      "vote_count": 56,
+      "id": 464882,
+      "video": false,
+      "vote_average": 6.1,
+      "title": "Batman vs. Two-Face",
+      "popularity": 8.254,
+      "poster_path": "/yTbj8Kcp4WFwMRdEejnn55KIsfH.jpg",
+      "original_language": "en",
+      "original_title": "Batman vs. Two-Face",
+      "genre_ids": [
+        28,
+        16,
+        35
+      ],
+      "backdrop_path": "/zuBoGr3DiGMjNC6W02YbtbeW0E1.jpg",
+      "adult": false,
+      "overview": "Former Gotham City District Attorney Harvey Dent, one side of his face scarred by acid, goes on a crime spree based on the number '2'. All of his actions are decided by the flip of a defaced, two-headed silver dollar.",
+      "release_date": "2017-11-14"
+    },
+    {
+      "vote_count": 239,
+      "id": 408648,
+      "video": false,
+      "vote_average": 5.8,
+      "title": "Batman and Harley Quinn",
+      "popularity": 7.629,
+      "poster_path": "/dPsjte846EcEWQpfMmGHrTWIJd8.jpg",
+      "original_language": "en",
+      "original_title": "Batman and Harley Quinn",
+      "genre_ids": [
+        12,
+        28,
+        16,
+        878
+      ],
+      "backdrop_path": "/2JVnUtyUKbQm165cXUF9r5iVPDo.jpg",
+      "adult": false,
+      "overview": "Batman and Nightwing are forced to team with the Joker's sometimes-girlfriend Harley Quinn to stop a global threat brought about by Poison Ivy and Jason Woodrue, the Floronic Man.",
+      "release_date": "2017-08-14"
+    },
+    {
+      "vote_count": 24,
+      "id": 456348,
+      "video": false,
+      "vote_average": 7.7,
+      "title": "Batman & Bill",
+      "popularity": 3.348,
+      "poster_path": "/gc1oyq0K8TdtFTXmYV03v536HsI.jpg",
+      "original_language": "en",
+      "original_title": "Batman & Bill",
+      "genre_ids": [
+        99
+      ],
+      "backdrop_path": "/u82RurwuuaHlnv0SWEpSSK8T7a8.jpg",
+      "adult": false,
+      "overview": "Everyone thinks that Bob Kane created Batman, but that’s not the whole truth. One author makes it his crusade to make it known that Bill Finger, a struggling writer, actually helped invent the iconic superhero, from concept to costume to the very character we all know and love. Bruce Wayne may be Batman’s secret identity, but his creator was always a true mystery.",
+      "release_date": "2017-05-06"
+    },
+    {
+      "vote_count": 65,
+      "id": 411736,
+      "video": false,
+      "vote_average": 6.8,
+      "title": "Batman: Return of the Caped Crusaders",
+      "popularity": 4.116,
+      "poster_path": "/GW3IyMW5Xgl0cgCN8wu96IlNpD.jpg",
+      "original_language": "en",
+      "original_title": "Batman: Return of the Caped Crusaders",
+      "genre_ids": [
+        28,
+        16,
+        12,
+        80,
+        878
+      ],
+      "backdrop_path": "/4HriXH0XmceHwW6FVFcl3KPUaVY.jpg",
+      "adult": false,
+      "overview": "Adam West and Burt Ward returns to their iconic roles of Batman and Robin. Featuring the voices of Adam West, Burt Ward, and Julie Newmar, the film sees the superheroes going up against classic villains like The Joker, The Riddler, The Penguin and Catwoman, both in Gotham City… and in space.",
+      "release_date": "2016-10-08"
+    },
+    {
+      "vote_count": 31,
+      "id": 300424,
+      "video": false,
+      "vote_average": 6.4,
+      "title": "LEGO DC Comics Super Heroes: Batman: Be-Leaguered",
+      "popularity": 4.832,
+      "poster_path": "/qD3xyKbCsaaYYDhksWFxxsE1DWq.jpg",
+      "original_language": "en",
+      "original_title": "LEGO DC Comics Super Heroes: Batman: Be-Leaguered",
+      "genre_ids": [
+        28,
+        12,
+        16,
+        10751
+      ],
+      "backdrop_path": "/6qXvtiL5zIJVswEQxW3hEkWLxzI.jpg",
+      "adult": false,
+      "overview": "Superman wants Batman to join his new superhero team, but Batman prides himself on being a self-sufficient loner.",
+      "release_date": "2014-10-27"
+    },
+    {
+      "vote_count": 1,
+      "id": 438741,
+      "video": false,
+      "vote_average": 8,
+      "title": "Being Batman",
+      "popularity": 0.6,
+      "poster_path": "/rQAuDMal8WTUaSQprc44AmlW7cf.jpg",
+      "original_language": "en",
+      "original_title": "Being Batman",
+      "genre_ids": [
+        99
+      ],
+      "backdrop_path": null,
+      "adult": false,
+      "overview": "Ryan Freeman’s profile documentary, Being Batman, gives us a tiny glimpse into the life of Stephen Lawrence—a man who has self monikered himself the “Brampton Batman.” Lawrence, dressed as the iconic hero, ventures out at night to patrol the city streets. He’s a real-life Bruce Wayne, complete with an outfit and arsenal that would make any cosplayer green with envy.",
+      "release_date": "2017-01-30"
+    },
+    {
+      "vote_count": 0,
+      "id": 461834,
+      "video": false,
+      "vote_average": 0,
+      "title": "Batman Is Just Not That Into You",
+      "popularity": 0.6,
+      "poster_path": "/cg4FZqcjuv7XVJEMa5beCNIf1y9.jpg",
+      "original_language": "en",
+      "original_title": "Batman Is Just Not That Into You",
+      "genre_ids": [
+        10751,
+        16
+      ],
+      "backdrop_path": null,
+      "adult": false,
+      "overview": "On the Dr. Quinn Show The Joker is breaking up with his longtime enemy, Batman. An animated short on the home entertainment release of The Lego Batman Movie.",
+      "release_date": "2017-06-14"
+    },
+    {
+      "vote_count": 0,
+      "id": 548888,
+      "video": true,
+      "vote_average": 0,
+      "title": "One Brick at a Time: Making the Lego Batman Movie",
+      "popularity": 0.6,
+      "poster_path": "/4aCdhj8YOtS8PYJlHAYhujClPlD.jpg",
+      "original_language": "en",
+      "original_title": "One Brick at a Time: Making the Lego Batman Movie",
+      "genre_ids": [
+        99
+      ],
+      "backdrop_path": null,
+      "adult": false,
+      "overview": "Documentary on the Lego Batman Movie.",
+      "release_date": "2017-06-19"
+    }
+  ]
+}

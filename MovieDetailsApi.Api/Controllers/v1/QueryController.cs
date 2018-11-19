@@ -42,12 +42,14 @@ namespace MovieDetailsApi.Api.Controllers.v1
 		}
 
 		[HttpGet]
-		[Route("{query:alpha:minlength(1)}/{year:int:range(1900,9999)}")]
+		[Route("{query:regex(^[[ 0-9A-Za-z]]+$)}/{year:int:range(1900,9999)}")]
 		[ProducesResponseType(typeof(IDetails), (int)HttpStatusCode.OK)]
 		public async Task<IActionResult> GetAsync([FromRoute] string query, [FromRoute] int year)
 		{
+			var id = query.ToLowerInvariant().Replace(" ", string.Empty) + year.ToString();
+
 			// try the cache
-			var details = await _mongoRepository.GetDetailsAsync(query, year)
+			var details = await _mongoRepository.GetDetailsAsync(id)
 				.ConfigureAwait(false);
 
 			if (details != default)
@@ -57,6 +59,8 @@ namespace MovieDetailsApi.Api.Controllers.v1
 
 			details = await _theMovieDbService.GetDetailsAsync(query, year)
 				.ConfigureAwait(false);
+
+			details.Id = id;
 
 			await _mongoRepository.CacheDetailsAsync(details)
 				.ConfigureAwait(false);

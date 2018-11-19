@@ -19,11 +19,12 @@ namespace MovieDetailsApi.Repositories.Tests
 		[Theory]
 		[InlineData(578, 124, "Jaws", 1975)]
 		public void MongoRepositoryTests_CacheDetailsAsync_BehavesPredictably(
-			int id, int runtime, string title, int year)
+			int theMovieDbId, int runtime, string title, int year)
 		{
 			var details = new Details
 			{
-				Id = id,
+				Id = title.ToLowerInvariant() + year.ToString(),
+				TheMovieDbId = theMovieDbId,
 				Runtime = runtime,
 				Title = title,
 				Year = year,
@@ -34,11 +35,11 @@ namespace MovieDetailsApi.Repositories.Tests
 		}
 
 		[Theory]
-		[InlineData("Jaws", 1975)]
+		[InlineData("jaws1975")]
 		public void MongoRepositoryTests_GetDetailsAsync_BehavesPredictably(
-			string title, int year)
+			string id)
 		{
-			var details = _mongoRepository.GetDetailsAsync(title, year)
+			var details = _mongoRepository.GetDetailsAsync(id)
 				.ConfigureAwait(false).GetAwaiter().GetResult();
 
 			if (details == default)
@@ -47,10 +48,9 @@ namespace MovieDetailsApi.Repositories.Tests
 			}
 
 			Assert.NotNull(details);
-			Assert.InRange(details.Id, 1, int.MaxValue);
+			Assert.InRange(details.TheMovieDbId, 1, int.MaxValue);
 			Assert.InRange(details.Runtime, 1, int.MaxValue);
-			Assert.Equal(title, details.Title);
-			Assert.Equal(year, details.Year);
+			Assert.Equal(id, details.Id);
 		}
 	}
 }

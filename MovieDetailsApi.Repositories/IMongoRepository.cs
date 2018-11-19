@@ -6,6 +6,6 @@ namespace MovieDetailsApi.Repositories
 	public interface IMongoRepository
 	{
 		Task CacheDetailsAsync(IDetails details);
-		Task<IDetails> GetDetailsAsync(string title, int year);
+		Task<IDetails> GetDetailsAsync(string id);
 	}
 }

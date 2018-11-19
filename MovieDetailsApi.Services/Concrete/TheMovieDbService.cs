@@ -35,7 +35,7 @@ namespace MovieDetailsApi.Services.Concrete
 
 			var response = new Details
 			{
-				Id = results.results[0].id,
+				TheMovieDbId = results.results[0].id,
 				Title = results.results[0].title,
 				Year = DateTime.Parse(results.results[0].release_date, default, System.Globalization.DateTimeStyles.AssumeUniversal).ToUniversalTime().Year,
 			};

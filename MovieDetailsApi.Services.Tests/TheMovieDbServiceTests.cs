@@ -26,7 +26,7 @@ namespace MovieDetailsApi.Services.Tests
 
 			// Assert
 			Assert.NotNull(actual);
-			Assert.InRange(actual.Id, 1, int.MaxValue);
+			Assert.InRange(actual.TheMovieDbId, 1, int.MaxValue);
 			Assert.NotNull(actual.Title);
 			Assert.NotEmpty(actual.Title);
 			Assert.InRange(actual.Runtime, 1, int.MaxValue);

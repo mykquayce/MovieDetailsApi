@@ -1,10 +1,10 @@
 ﻿using Dawn;
 using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using MovieDetailsApi.Models;
 using MovieDetailsApi.Models.Concrete;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,7 +12,7 @@ namespace MovieDetailsApi.Repositories.Concrete
 {
 	public class MongoRepository : IMongoRepository
 	{
-		private readonly IMongoCollection<Details> _collection;
+		private readonly IMongoCollection<IDetails> _collection;
 		private static readonly InsertOneOptions _insertOneOptions = new InsertOneOptions { BypassDocumentValidation = false, };
 
 		public MongoRepository(
@@ -20,21 +20,40 @@ namespace MovieDetailsApi.Repositories.Concrete
 		{
 			Guard.Argument(() => settingsOptions).NotNull();
 			Guard.Argument(() => settingsOptions.Value).NotNull();
-			Guard.Argument(() => settingsOptions.Value.MongoConnectionString).NotNull().NotEmpty().NotWhiteSpace();
+			Guard.Argument(() => settingsOptions.Value.MongoConnectionStrings).NotNull().NotEmpty().DoesNotContainNull();
 			Guard.Argument(() => settingsOptions.Value.MongoDatabaseName).NotNull().NotEmpty().NotWhiteSpace();
 			Guard.Argument(() => settingsOptions.Value.MongoCollectionName).NotNull().NotEmpty().NotWhiteSpace();
 
-			var client = new MongoClient(settingsOptions.Value.MongoConnectionString);
+			IMongoDatabase db = default;
 
-			var db = client.GetDatabase(settingsOptions.Value.MongoDatabaseName);
+			foreach (var mongoConnectionString in settingsOptions.Value.MongoConnectionStrings)
+			{
+				var client = new MongoClient(mongoConnectionString);
 
-			_collection = db.GetCollection<Details>(settingsOptions.Value.MongoCollectionName);
+				db = client.GetDatabase(settingsOptions.Value.MongoDatabaseName);
+
+				var success = db.RunCommandAsync((Command<BsonDocument>)"{ping:1}")
+					.Wait(millisecondsTimeout: 1_000);
+
+				if (success)
+				{
+					break;
+				}
+			}
+
+			if (db == default)
+			{
+				throw new System.InvalidOperationException("Unable to connect to Mongo DB");
+			}
+
+			_collection = db.GetCollection<IDetails>(settingsOptions.Value.MongoCollectionName);
 		}
 
 		public async Task CacheDetailsAsync(IDetails details)
 		{
 			Guard.Argument(() => details).NotNull();
 			Guard.Argument(() => details.Id).NotNull().NotEmpty().NotWhiteSpace().Matches(@"^[0-9a-z]+\d{4}$");
+			Guard.Argument(() => details.Runtime).NotNegative();
 			Guard.Argument(() => details.TheMovieDbId).InRange(1, int.MaxValue);
 			Guard.Argument(() => details.Title).NotNull().NotEmpty().NotWhiteSpace();
 			Guard.Argument(() => details.Year).InRange(1900, 9999);
@@ -54,14 +73,13 @@ namespace MovieDetailsApi.Repositories.Concrete
 				.ConfigureAwait(false);
 		}
 
-		public async Task<IDetails> GetDetailsAsync(string id)
+		public Task<IDetails> GetDetailsAsync(string id)
 		{
 			Guard.Argument(() => id).NotNull().NotEmpty().NotWhiteSpace().Matches(@"^[0-9a-z]+\d{4}$");
 
-			return await _collection
-				.FindSync(d => d.Id == id)
-				.FirstOrDefaultAsync()
-				.ConfigureAwait(false);
+			return _collection
+				.FindSync(d => ((Details)d).Id == id)
+				.FirstOrDefaultAsync();
 		}
 	}
 }

@@ -1,8 +1,10 @@
-﻿namespace MovieDetailsApi.Models.Concrete
+﻿using System.Collections.Generic;
+
+namespace MovieDetailsApi.Models.Concrete
 {
 	public class Settings
 	{
-		public string MongoConnectionString { get; set; }
+		public string[] MongoConnectionStrings { get; set; }
 		public string MongoDatabaseName { get; set; }
 		public string MongoCollectionName { get; set; }
 		public string TheMovieDbApiKey { get; set; }

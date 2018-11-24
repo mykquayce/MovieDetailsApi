@@ -5,7 +5,6 @@ using Dawn;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using MovieDetailsApi.Models;
-using MovieDetailsApi.Repositories;
 using MovieDetailsApi.Services;
 
 namespace MovieDetailsApi.Api.Controllers.v1
@@ -15,16 +14,16 @@ namespace MovieDetailsApi.Api.Controllers.v1
 	public class QueryController : ControllerBase
 	{
 		private readonly IHostingEnvironment _hostingEnvironment;
-		private readonly IMongoRepository _mongoRepository;
+		private readonly IMongoService _mongoService;
 		private readonly ITheMovieDbService _theMovieDbService;
 
 		public QueryController(
 			IHostingEnvironment hostingEnvironment,
-			IMongoRepository mongoRepository,
+			IMongoService mongoService,
 			ITheMovieDbService theMovieDbService)
 		{
 			_hostingEnvironment = Guard.Argument(() => hostingEnvironment).NotNull().Value;
-			_mongoRepository = Guard.Argument(() => mongoRepository).NotNull().Value;
+			_mongoService = Guard.Argument(() => mongoService).NotNull().Value;
 			_theMovieDbService = Guard.Argument(() => theMovieDbService).NotNull().Value;
 		}
 
@@ -42,14 +41,12 @@ namespace MovieDetailsApi.Api.Controllers.v1
 		}
 
 		[HttpGet]
-		[Route("{query:regex(^[[ 0-9A-Za-z]]+$)}/{year:int:range(1900,9999)}")]
+		[Route("{title:regex(^[[ 0-9A-Za-z]]+$)}/{year:int:range(1900,9999)}")]
 		[ProducesResponseType(typeof(IDetails), (int)HttpStatusCode.OK)]
-		public async Task<IActionResult> GetAsync([FromRoute] string query, [FromRoute] int year)
+		public async Task<IActionResult> GetAsync([FromRoute] string title, [FromRoute] int year)
 		{
-			var id = query.ToLowerInvariant().Replace(" ", string.Empty) + year.ToString();
-
 			// try the cache
-			var details = await _mongoRepository.GetDetailsAsync(id)
+			var details = await _mongoService.GetDetailsAsync(title, year)
 				.ConfigureAwait(false);
 
 			if (details != default)
@@ -57,12 +54,10 @@ namespace MovieDetailsApi.Api.Controllers.v1
 				return Ok(details);
 			}
 
-			details = await _theMovieDbService.GetDetailsAsync(query, year)
+			details = await _theMovieDbService.GetDetailsAsync(title, year)
 				.ConfigureAwait(false);
 
-			details.Id = id;
-
-			await _mongoRepository.CacheDetailsAsync(details)
+			await _mongoService.SavetDetailsAsync(details)
 				.ConfigureAwait(false);
 
 			return Ok(details);

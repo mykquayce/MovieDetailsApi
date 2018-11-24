@@ -56,6 +56,7 @@ namespace MovieDetailsApi.Api
 			services
 				.AddTransient<Services.IJsonSerializationService, Services.Concrete.JsonSerializationService>()
 				.AddTransient<Services.ISerializationService, Services.Concrete.JsonSerializationService>()
+				.AddTransient<Services.IMongoService, Services.Concrete.MongoService>()
 				.AddTransient<Services.ITheMovieDbService, Services.Concrete.TheMovieDbService>();
 
 			// repositories

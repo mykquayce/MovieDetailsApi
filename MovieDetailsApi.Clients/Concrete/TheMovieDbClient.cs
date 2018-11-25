@@ -1,6 +1,5 @@
 ﻿using Dawn;
 using Microsoft.Extensions.Options;
-using MovieDetailsApi.Models.Concrete;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -13,18 +12,18 @@ namespace MovieDetailsApi.Clients.Concrete
 
 		public TheMovieDbClient(
 			IHttpClientFactory httpClientFactory,
-			IOptions<Settings> settingsOptions)
+			IOptions<Options.TheMovieDbApi> theMovieDbApiOptions)
 			: base(httpClientFactory)
 		{
-			Guard.Argument(() => settingsOptions).NotNull();
-			Guard.Argument(() => settingsOptions.Value).NotNull();
+			Guard.Argument(() => theMovieDbApiOptions).NotNull();
+			Guard.Argument(() => theMovieDbApiOptions.Value).NotNull();
 
 			_apiKey = Guard
-				.Argument(() => settingsOptions.Value.TheMovieDbApiKey)
+				.Argument(() => theMovieDbApiOptions.Value.ApiKey)
 				.NotNull()
 				.NotEmpty()
 				.NotWhiteSpace()
-				.Require(s => string.Equals(s, s.Trim()), _ => nameof(Settings.TheMovieDbApiKey) + " cannot have leading/trailing whitespace")
+				.Require(s => string.Equals(s, s.Trim()), _ => nameof(Options.TheMovieDbApi.ApiKey) + " cannot have leading/trailing whitespace")
 				.Value;
 		}
 

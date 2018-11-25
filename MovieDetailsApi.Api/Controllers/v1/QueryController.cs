@@ -1,11 +1,11 @@
-﻿using System;
-using System.Net;
-using System.Threading.Tasks;
-using Dawn;
+﻿using Dawn;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using MovieDetailsApi.Models;
 using MovieDetailsApi.Services;
+using System;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace MovieDetailsApi.Api.Controllers.v1
 {
@@ -56,6 +56,11 @@ namespace MovieDetailsApi.Api.Controllers.v1
 
 			details = await _theMovieDbService.GetDetailsAsync(title, year)
 				.ConfigureAwait(false);
+
+			if (details == default)
+			{
+				return NotFound();
+			}
 
 			await _mongoService.SavetDetailsAsync(details)
 				.ConfigureAwait(false);

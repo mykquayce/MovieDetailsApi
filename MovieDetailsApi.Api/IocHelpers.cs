@@ -35,15 +35,16 @@ namespace MovieDetailsApi.Api
 
 			// settings
 			services
-				.Configure<Models.Concrete.Settings>(configuration);
+				.Configure<Options.Mongo>(configuration.GetSection(nameof(Options.Mongo)))
+				.Configure<Options.TheMovieDbApi>(configuration.GetSection(nameof(Options.TheMovieDbApi)));
 
 			// http clients
 			services
 				.AddHttpClient(nameof(Clients.Concrete.TheMovieDbClient))
 				.ConfigureHttpClient((provider, client) =>
 				{
-					var settings = provider.GetRequiredService<IOptions<Models.Concrete.Settings>>().Value;
-					client.BaseAddress = new Uri(settings.TheMovieDbApiUrl, UriKind.Absolute);
+					var settings = provider.GetRequiredService<IOptions<Options.TheMovieDbApi>>().Value;
+					client.BaseAddress = new Uri(settings.UriString, UriKind.Absolute);
 					client.DefaultRequestHeaders.Clear();
 					client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 				});

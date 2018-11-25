@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MovieDetailsApi.Models\MovieDetailsApi.Models.csproj" />
+    <ProjectReference Include="..\MovieDetailsApi.Options\MovieDetailsApi.Options.csproj" />
   </ItemGroup>
 
 </Project>

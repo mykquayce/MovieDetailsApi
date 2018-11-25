@@ -16,21 +16,21 @@ namespace MovieDetailsApi.Repositories.Concrete
 		private static readonly InsertOneOptions _insertOneOptions = new InsertOneOptions { BypassDocumentValidation = false, };
 
 		public MongoRepository(
-			IOptions<Settings> settingsOptions)
+			IOptions<Options.Mongo> mongoOptions)
 		{
-			Guard.Argument(() => settingsOptions).NotNull();
-			Guard.Argument(() => settingsOptions.Value).NotNull();
-			Guard.Argument(() => settingsOptions.Value.MongoConnectionStrings).NotNull().NotEmpty().DoesNotContainNull();
-			Guard.Argument(() => settingsOptions.Value.MongoDatabaseName).NotNull().NotEmpty().NotWhiteSpace();
-			Guard.Argument(() => settingsOptions.Value.MongoCollectionName).NotNull().NotEmpty().NotWhiteSpace();
+			Guard.Argument(() => mongoOptions).NotNull();
+			Guard.Argument(() => mongoOptions.Value).NotNull();
+			Guard.Argument(() => mongoOptions.Value.ConnectionStrings).NotNull().NotEmpty().DoesNotContainNull();
+			Guard.Argument(() => mongoOptions.Value.DatabaseName).NotNull().NotEmpty().NotWhiteSpace();
+			Guard.Argument(() => mongoOptions.Value.CollectionName).NotNull().NotEmpty().NotWhiteSpace();
 
 			IMongoDatabase db = default;
 
-			foreach (var mongoConnectionString in settingsOptions.Value.MongoConnectionStrings)
+			foreach (var mongoConnectionString in mongoOptions.Value.ConnectionStrings)
 			{
 				var client = new MongoClient(mongoConnectionString);
 
-				db = client.GetDatabase(settingsOptions.Value.MongoDatabaseName);
+				db = client.GetDatabase(mongoOptions.Value.DatabaseName);
 
 				var success = db.RunCommandAsync((Command<BsonDocument>)"{ping:1}")
 					.Wait(millisecondsTimeout: 1_000);
@@ -46,7 +46,7 @@ namespace MovieDetailsApi.Repositories.Concrete
 				throw new System.InvalidOperationException("Unable to connect to Mongo DB");
 			}
 
-			_collection = db.GetCollection<IDetails>(settingsOptions.Value.MongoCollectionName);
+			_collection = db.GetCollection<IDetails>(mongoOptions.Value.CollectionName);
 		}
 
 		public async Task CacheDetailsAsync(IDetails details)

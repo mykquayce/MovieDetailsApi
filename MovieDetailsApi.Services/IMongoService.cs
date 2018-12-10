@@ -6,6 +6,6 @@ namespace MovieDetailsApi.Services
 	public interface IMongoService
 	{
 		Task<IDetails> GetDetailsAsync(string title, int year);
-		Task SavetDetailsAsync(IDetails details);
+		Task SaveDetailsAsync(IDetails details);
 	}
 }

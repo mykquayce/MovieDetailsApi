@@ -62,7 +62,7 @@ namespace MovieDetailsApi.Api.Controllers.v1
 				return NotFound();
 			}
 
-			await _mongoService.SavetDetailsAsync(details)
+			await _mongoService.SaveDetailsAsync(details)
 				.ConfigureAwait(false);
 
 			return Ok(details);

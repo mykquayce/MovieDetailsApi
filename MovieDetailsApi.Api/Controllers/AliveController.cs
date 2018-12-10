@@ -1,7 +1,7 @@
-﻿using System;
-using Dawn;
+﻿using Dawn;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace MovieDetailsApi.Api.Controllers
 {

@@ -34,7 +34,7 @@ namespace MovieDetailsApi.Services.Concrete
 			}
 		}
 
-		public Task SavetDetailsAsync(IDetails details)
+		public Task SaveDetailsAsync(IDetails details)
 		{
 			Guard.Argument(() => details).NotNull();
 			Guard.Argument(() => details.Id).Require(s => s == default || Regex.IsMatch(s, @"^[ 0-9a-z]+\d{4}$"));

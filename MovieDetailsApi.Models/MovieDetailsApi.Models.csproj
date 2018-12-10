@@ -8,8 +8,4 @@
     <Company>Bob</Company>
   </PropertyGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="&quot;$(DevEnvDir)..\..\MSBuild\15.0\Bin\amd64\MSBuild.exe&quot; /target:Pack &quot;$(ProjectPath)&quot; /property:PackageOutputPath=&quot;\\nuget\nuget&quot;" />
-  </Target>
-
 </Project>

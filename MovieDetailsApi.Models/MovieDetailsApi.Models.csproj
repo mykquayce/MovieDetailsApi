@@ -6,6 +6,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Bob</Authors>
     <Company>Bob</Company>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
 </Project>

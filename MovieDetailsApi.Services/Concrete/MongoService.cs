@@ -58,13 +58,16 @@ namespace MovieDetailsApi.Services.Concrete
 			}
 		}
 
+		private static readonly Regex _replaceRegex = new Regex("[^0-9a-z]", RegexOptions.Compiled | RegexOptions.CultureInvariant);
+
 		private static string BuildId(string title, int year)
 		{
 			Guard.Argument(() => title).NotNull().NotEmpty().NotWhiteSpace();
 			Guard.Argument(() => year).InRange(1900, 9999);
 
-			return title.ToLowerInvariant().Replace(" ", string.Empty)
-				+ year.ToString();
+			var id = title.ToLowerInvariant() + year.ToString("D4");
+
+			return _replaceRegex.Replace(id, string.Empty);
 		}
 	}
 }

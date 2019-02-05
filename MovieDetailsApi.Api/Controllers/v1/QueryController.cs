@@ -41,7 +41,7 @@ namespace MovieDetailsApi.Api.Controllers.v1
 		}
 
 		[HttpGet]
-		[Route("{title:regex(^[[ 0-9A-Za-z]]+$)}/{year:int:range(1900,9999)}")]
+		[Route("{title:minlength(1)}/{year:int:range(1900,9999)}")]
 		[ProducesResponseType(typeof(IDetails), (int)HttpStatusCode.OK)]
 		public async Task<IActionResult> GetAsync([FromRoute] string title, [FromRoute] int year)
 		{
@@ -62,8 +62,7 @@ namespace MovieDetailsApi.Api.Controllers.v1
 				return NotFound();
 			}
 
-			await _mongoService.SaveDetailsAsync(details)
-				.ConfigureAwait(false);
+			_mongoService.SaveDetailsAsync(details);
 
 			return Ok(details);
 		}
